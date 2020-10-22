@@ -14,6 +14,8 @@ namespace TweetCountChecker
                 IServiceProvider services = ServiceProviderManager.GetDefaultServiceProvider();
                 var command = services.GetService<CountCommand>();
                 command.Execute();
+
+                ExitCode.Completed.Apply();
             }
             catch (Exception ex)
             {
