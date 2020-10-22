@@ -27,6 +27,25 @@ namespace TweetCountChecker.Infrastractures
         }
 
         /// <summary>
+        /// 指定したユーザー スクリーン名 (@ID) からユーザー IDを取得します。
+        /// </summary>
+        /// <param name="userScreenName">ユーザー スクリーン名 (@ID)。</param>
+        /// <returns>ユーザー スクリーン名 (@ID) に一致するユーザー ID。</returns>
+        public long GetUserId(string userScreenName)
+        {
+            try
+            {
+                Tokens t = CreateTokens();
+                UserResponse response = t.Users.Show(userScreenName);
+                return response.Id ?? 0L;
+            }
+            catch (TwitterException ex) when (ex.Message == "User not found.")
+            {
+                throw new ApplicationException($"指定されたユーザー '@{userScreenName}' は存在しません。", ex);
+            }
+        }
+
+        /// <summary>
         /// 指定したユーザー ID のタイムラインからツイートのコレクションを取得します。
         /// </summary>
         /// <param name="userId">タイムラインを取得するユーザー ID。</param>

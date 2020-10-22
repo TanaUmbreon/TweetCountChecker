@@ -9,6 +9,13 @@ namespace TweetCountChecker.Repositories
     public interface ITwitterRepository
     {
         /// <summary>
+        /// 指定したユーザー スクリーン名 (@ID) からユーザー IDを取得します。
+        /// </summary>
+        /// <param name="userScreenName">ユーザー スクリーン名 (@ID)。</param>
+        /// <returns>ユーザー スクリーン名 (@ID) に一致するユーザー ID。</returns>
+        public long GetUserId(string userScreenName);
+
+        /// <summary>
         /// 指定したユーザー ID のタイムラインからツイートのコレクションを取得します。
         /// </summary>
         /// <param name="userId">タイムラインを取得するユーザー ID。</param>

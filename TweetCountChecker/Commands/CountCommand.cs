@@ -31,8 +31,7 @@ namespace TweetCountChecker.Commands
         {
             Console.WriteLine($"[Info] ユーザーのタイムラインのツイートを取得しています。");
 
-            // Memo: API経由で@IDからユーザーIDを取得したかったけど手抜きによりハードコード
-            long userId = 1257075494L; // @UmbreonTanaのユーザーID
+            long userId = twitter.GetUserId(settings.TargetUserAtId);
 
             IEnumerable<Tweet> tweets = GetUserTimelineTweetsSafety(userId);
             if (!tweets.Any()) { throw new ApplicationException("タイムラインのツイートが一つも取得できませんでした。処理を中断します。"); }
